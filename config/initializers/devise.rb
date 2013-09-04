@@ -222,9 +222,11 @@ Devise.setup do |config|
   require "omniauth-facebook"
   require "omniauth-google-oauth2"
   require "omniauth-twitter"
+  require "openid/store/filesystem"
+  config.omniauth :open_id, :store => OpenID::Store::Filesystem.new('/tmp'),:name =>'yahoo', :identifier =>'http://yahoo.com', :require => 'omniauth-openid'
   config.omniauth :facebook, ENV["FACEBOOK_ID"], ENV["FACEBOOK_SECRET"]
-  config.omniauth :google_oauth2, ENV["GOOGLE_KEY"], ENV["GOOGLE_SECRET"], { access_type: "offline", approval_prompt: "" }
-  config.omniauth :twitter, 'APP_ID', 'APP_SECRET'
+  config.omniauth :google_oauth2, ENV["GOOGLE_KEY"], ENV["GOOGLE_SECRET"]
+  config.omniauth :twitter, ENV["APP_KEY"],ENV["APP_SECRET"]
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
