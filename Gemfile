@@ -47,6 +47,7 @@ gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-twitter'
 gem 'certified', '~> 0.1.1'
+gem 'omniauth-openid'
 
 #Authorization
 gem "cancan"
