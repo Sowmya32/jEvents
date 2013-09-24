@@ -14,23 +14,35 @@
     <meta property="og:image" content="<%= 'http://3kwd.localtunnel.com'+ imageurl %>" />
 <% end %>
 
+<% @hasUserAlreadyRated = (current_user != nil && @venue.ratings.exists?(:user_id => current_user.id))
+@ratingHint = getOptions('RatingHint')%>
+
 <% @suitable = '' 
 @venue.suitable_events.each do |a| 
     @suitable = @suitable+a.name+', ' 
 end%>
 <%= hidden_field_tag 'venue_id', @venue.id %>
-<%= hidden_field_tag 'rating', @venue.rating %>
+<%#= hidden_field_tag 'rating', @venue.rating %>
+<%#= hidden_field_tag 'hasUserAlreadyRated', @hasUserAlreadyRated %>
+<%= hidden_field_tag 'ratingHint', @ratingHint %>
+
 <div class="row-fluid">
   <div>
     <h4><%= @venue.name %>, <%= @venue.venue_type %></h4>
+    <%= render partial: 'ratings/rating', locals: { :venues => @venue } %>
+    <%#= request.remote_ip %>
     <h6><%= @venue.address.address %>, <%= @venue.address.area %></h6>
   </div>
 
   <div class="fb-like fr" data-width="250" data-action="recommend" data-show-faces="true"></div>
-  <div id="rating-div">
-    <div id="star"></div>
-    <%= render partial: 'ratings/rating', locals: { :venues => @venue } %>
-  </div>
+  <% if @hasUserAlreadyRated %>
+    You have rated this venue.
+  <% else %>
+    <div id="rating-div">
+      Rate this venue:
+      <div id="star"></div>
+    </div>
+  <% end %>
 </div>
 <div id="show_venue">
   <div class="row-fluid">

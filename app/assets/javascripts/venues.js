@@ -49,14 +49,18 @@ $(document).ready(function(){
 		});
 	});
 	
-
 	$('#star').raty({
-		score: function() {
-			return $('#rating:hidden').attr('value');
-		},
+//                readOnly: $('#hasUserAlreadyRated:hidden').attr('value') == 'true',
+//		score: function() {
+//			return $('#rating:hidden').attr('value');
+//		},
 		click: function(score, evt) {
 			rate(score, evt);
-		}
+//                        $(this).find('img').unbind();
+//                        $(this).css('cursor', 'default');
+		},
+                        
+                hints: $('#ratingHint:hidden').attr('value').split("; ")
 	});
 
 	/*
@@ -97,6 +101,7 @@ function rate(score, evt){
 		type: "POST",
 		data: {id:$(this).attr('id'), rating:score, venue_id:venue_id  },
 		success: function(data) {
+                    $("#rating-div").html('You have rated this venue.');                    
 		},
 		error: function(XMLHttpRequest, textStatus, errorThrown){
 			alert(textStatus + errorThrown);

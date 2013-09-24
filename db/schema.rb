@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130828133316) do
+ActiveRecord::Schema.define(:version => 20130906113909) do
 
   create_table "addresses", :force => true do |t|
     t.integer  "venue_id"
@@ -156,10 +156,14 @@ ActiveRecord::Schema.define(:version => 20130828133316) do
     t.integer  "user_id"
     t.integer  "venue_id"
     t.string   "review"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
     t.boolean  "is_verified"
     t.integer  "verified_by"
+    t.integer  "rating_venue"
+    t.integer  "rating_food"
+    t.integer  "rating_services"
+    t.integer  "rating_facilities"
   end
 
   add_index "reviews", ["user_id"], :name => "index_reviews_on_user_id"
