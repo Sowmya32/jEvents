@@ -3,6 +3,6 @@
     <% @ratingDisplay = (((@venue.rating * 2).round / 2.0)*10).to_i %>
     <%# @ratingDisplay =  ((@venue.rating.to_i == @venue.rating ? @venue.rating : (@venue.rating.to_i + 0.5))*10).to_i %>
     <span class="rating-static rating-<%= @ratingDisplay.to_s %>"></span>
-    <%=number_with_precision(@venue.rating, :precision => 2) %> From <%= pluralize(@venue.rating_count, 'user') %>
+    <%=number_with_precision(@venue.rating, :precision => 2) %> from <%= pluralize(@venue.rating_count, 'rating') %>
   <% end %>
 </span>

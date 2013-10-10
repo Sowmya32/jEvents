@@ -1,4 +1,4 @@
-<%= javascript_include_tag "rating.js" %>
+<%= javascript_include_tag "application.js" %>
 <% @ratingHint = getOptions('RatingHint')%>
 
 <%= form_for [@venue, @review], :remote =>true, :class=>"form-horizontal" do |f| %>
@@ -84,15 +84,16 @@
           </div>
           <div class="span10">
               <div class="updatedAt">
-                <% @time_diff = (Time.now - r.updated_at.localtime).round %>
+                <% @time_diff = (Time.now.utc - r.updated_at).round %>
+                <% @ist = r.updated_at.in_time_zone(TZInfo::Timezone.get('Asia/Kolkata')) %>
                 <% if @time_diff < 60 %>
                   <%= pluralize(@time_diff, 'second') %> ago
                 <% elsif @time_diff < 3600 %>
-                  <%= pluralize(@time_diff/60, 'minute') %> ago at <%= r.updated_at.localtime.strftime("%l:%M %p") %>
+                  <%= pluralize(@time_diff/60, 'minute') %> ago at <%= @ist.strftime("%l:%M %p %Z") %>
                 <% elsif @time_diff < 86400 %>
-                  <%= pluralize(@time_diff/3600, 'hour') %> ago at <%= r.updated_at.localtime.strftime("%l:%M %p") %>
+                  <%= pluralize(@time_diff/3600, 'hour') %> ago at <%= @ist.strftime("%l:%M %p %Z") %>
                 <% else %>
-                  <%= r.updated_at.localtime.strftime("%B %e, %Y at %l:%M %p") %>
+                  <%= @ist.strftime("%B %e, %Y at %l:%M %p %Z") %>
                 <% end %>
               </div>
             <div class="margin10">

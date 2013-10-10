@@ -49,19 +49,21 @@ $(document).ready(function(){
 		});
 	});
 	
-	$('#star').raty({
-//                readOnly: $('#hasUserAlreadyRated:hidden').attr('value') == 'true',
-//		score: function() {
-//			return $('#rating:hidden').attr('value');
-//		},
-		click: function(score, evt) {
-			rate(score, evt);
-//                        $(this).find('img').unbind();
-//                        $(this).css('cursor', 'default');
-		},
-                        
-                hints: $('#ratingHint:hidden').attr('value').split("; ")
-	});
+        if ($('#star').length) {
+            $('#star').raty({
+    //                readOnly: $('#hasUserAlreadyRated:hidden').attr('value') == 'true',
+    //		score: function() {
+    //			return $('#rating:hidden').attr('value');
+    //		},
+                    click: function(score, evt) {
+                            rate(score, evt);
+    //                        $(this).find('img').unbind();
+    //                        $(this).css('cursor', 'default');
+                    },
+
+                    hints: $('#ratingHint:hidden').attr('value').split("; ")
+            });
+        }
 
 	/*
 	$('#reco_venue').on('click', function(evt){
