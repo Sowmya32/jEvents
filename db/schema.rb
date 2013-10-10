@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130828133316) do
+ActiveRecord::Schema.define(:version => 20131009135855) do
 
   create_table "addresses", :force => true do |t|
     t.integer  "venue_id"
@@ -147,6 +147,7 @@ ActiveRecord::Schema.define(:version => 20130828133316) do
     t.integer  "rating"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "client_ip"
   end
 
   add_index "ratings", ["user_id"], :name => "index_ratings_on_user_id"
@@ -156,10 +157,16 @@ ActiveRecord::Schema.define(:version => 20130828133316) do
     t.integer  "user_id"
     t.integer  "venue_id"
     t.string   "review"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
     t.boolean  "is_verified"
     t.integer  "verified_by"
+    t.integer  "rating_venue"
+    t.integer  "rating_food"
+    t.integer  "rating_services"
+    t.integer  "rating_facilities"
+    t.integer  "rating_total"
+    t.integer  "rating_count"
   end
 
   add_index "reviews", ["user_id"], :name => "index_reviews_on_user_id"
@@ -263,25 +270,26 @@ ActiveRecord::Schema.define(:version => 20130828133316) do
     t.string   "venue_type"
     t.string   "website"
     t.text     "terms_conditions"
-    t.datetime "created_at",                                                          :null => false
-    t.datetime "updated_at",                                                          :null => false
+    t.datetime "created_at",                                                                       :null => false
+    t.datetime "updated_at",                                                                       :null => false
     t.binary   "base_image"
     t.integer  "num_halls"
     t.integer  "min_capacity"
     t.integer  "max_capacity"
-    t.integer  "user_id",                                                             :null => false
-    t.decimal  "popularity_index",  :precision => 10, :scale => 0
-    t.boolean  "view_available",                                   :default => false
-    t.boolean  "booking_available",                                :default => false
-    t.boolean  "enquiry_available",                                :default => false
-    t.boolean  "is_approved",                                      :default => false
+    t.integer  "user_id",                                                                          :null => false
+    t.decimal  "popularity_index",               :precision => 10, :scale => 0
+    t.boolean  "view_available",                                                :default => false
+    t.boolean  "booking_available",                                             :default => false
+    t.boolean  "enquiry_available",                                             :default => false
+    t.boolean  "is_approved",                                                   :default => false
     t.string   "description"
-    t.decimal  "rating",            :precision => 10, :scale => 2
+    t.decimal  "rating",                         :precision => 10, :scale => 2
     t.integer  "review_count"
     t.integer  "rating_count"
-    t.integer  "plan",                                             :default => 10,    :null => false
+    t.integer  "plan",                                                          :default => 10,    :null => false
     t.text     "payment_policy"
-    t.boolean  "is_verified",                                      :default => false
+    t.boolean  "is_verified",                                                   :default => false
+    t.integer  "rating_total",      :limit => 8
   end
 
 end

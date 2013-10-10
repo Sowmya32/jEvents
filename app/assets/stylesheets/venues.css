@@ -34,12 +34,23 @@ div.roundedBorder{
 
 .review{
 	padding-left: 1em;
-	background-color: rgb(217,231,231);
+	/*background-color: rgb(217,231,231);*/
+        border: 2px solid rgb(217,231,231);
 	-moz-border-radius: 6px;
 	-webkit-border-radius:6px;
 	border-radius: 6px;
-	width: 60%;
-	margin-bottom: 3px;
+	width: 70%;
+	margin-bottom: 7px;
+}
+
+.review .updatedAt {
+    text-align: right;
+    font-style: italic;
+    color: grey;
+}
+
+.review .ratingHint {
+    font-size: 11px;
 }
 
 .margin10{

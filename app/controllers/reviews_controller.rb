@@ -55,9 +55,17 @@ class ReviewsController < ApplicationController
     @review = Review.new(params[:review])
     @review.venue_id = @venue.id
     @review.user_id = current_user.id
+    
+    rating = getRatingArray(@review)
+    @review.rating_count = rating.length
+    @review.rating_total = rating.sum
 
     respond_to do |format|
       if @review.save
+        @rating_count = (@venue.rating_count == nil ? 0 : @venue.rating_count) + rating.length
+        @rating_total = (@venue.rating_total == nil ? 0 : @venue.rating_total) + rating.sum
+        @venue.update_attributes(:rating =>  (@rating_total.to_f / @rating_count.to_f), :rating_count =>  @rating_count, :rating_total => @rating_total)
+        
         @review = Review.new
         format.js 
       else
@@ -71,9 +79,15 @@ class ReviewsController < ApplicationController
   # PUT /reviews/1.json
   def update
     @review = Review.find(params[:id])
+    
+    rating = getRatingArray(Review.new(params[:review]))
+    @rating_count = (@venue.rating_count == nil ? 0 : @venue.rating_count) - (@review.rating_count == nil ? 0 : @review.rating_count) + rating.length
+    @rating_total = (@venue.rating_total == nil ? 0 : @venue.rating_total) - (@review.rating_total == nil ? 0 : @review.rating_total) + rating.sum
 
     respond_to do |format|
-      if @review.update_attributes(params[:review])
+      if @review.update_attributes(params[:review].merge(:rating_count =>  rating.length, :rating_total => rating.sum))
+        @venue.update_attributes(:rating =>  (@rating_total.to_f / @rating_count.to_f), :rating_count =>  @rating_count, :rating_total => @rating_total)
+        
         @review = Review.new
         format.js 
       else
@@ -87,11 +101,28 @@ class ReviewsController < ApplicationController
   # DELETE /reviews/1.json
   def destroy
     @review = Review.find(params[:id])
-    @review.destroy
-
+    
+    @rating_count = (@venue.rating_count == nil ? 0 : @venue.rating_count) - (@review.rating_count == nil ? 0 : @review.rating_count)
+    @rating_total = (@venue.rating_total == nil ? 0 : @venue.rating_total) - (@review.rating_total == nil ? 0 : @review.rating_total)
+    
+    if @review.destroy
+      @venue.update_attributes(:rating =>  (@rating_total.to_f / @rating_count.to_f), :rating_count =>  @rating_count, :rating_total => @rating_total)
+    end
+    
     respond_to do |format|
       @review = Review.new
       format.js
     end
+  end
+  
+  def getRatingArray(review)
+    rating = Array.new
+    
+    rating << review.rating_venue unless review.rating_venue.nil?
+    rating << review.rating_food unless review.rating_food.nil?
+    rating << review.rating_services unless review.rating_services.nil?
+    rating << review.rating_facilities unless review.rating_facilities.nil?
+        
+    return rating
   end
 end

@@ -188,4 +188,11 @@
 		<option>Board</option>
 		<option>Roundtable</option>
 	</Seating>
+        <RatingHint>
+            <option>Bad;</option>
+            <option>Average;</option>
+            <option>Good;</option>
+            <option>Very Good;</option>
+            <option>Excellent</option>
+        </RatingHint>
 </Properties>

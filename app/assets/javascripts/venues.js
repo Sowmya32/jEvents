@@ -49,15 +49,21 @@ $(document).ready(function(){
 		});
 	});
 	
+        if ($('#star').length) {
+            $('#star').raty({
+    //                readOnly: $('#hasUserAlreadyRated:hidden').attr('value') == 'true',
+    //		score: function() {
+    //			return $('#rating:hidden').attr('value');
+    //		},
+                    click: function(score, evt) {
+                            rate(score, evt);
+    //                        $(this).find('img').unbind();
+    //                        $(this).css('cursor', 'default');
+                    },
 
-	$('#star').raty({
-		score: function() {
-			return $('#rating:hidden').attr('value');
-		},
-		click: function(score, evt) {
-			rate(score, evt);
-		}
-	});
+                    hints: $('#ratingHint:hidden').attr('value').split("; ")
+            });
+        }
 
 	/*
 	$('#reco_venue').on('click', function(evt){
@@ -97,6 +103,7 @@ function rate(score, evt){
 		type: "POST",
 		data: {id:$(this).attr('id'), rating:score, venue_id:venue_id  },
 		success: function(data) {
+                    $("#rating-div").html('You have rated this venue.');                    
 		},
 		error: function(XMLHttpRequest, textStatus, errorThrown){
 			alert(textStatus + errorThrown);
