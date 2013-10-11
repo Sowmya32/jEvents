@@ -1,21 +1,11 @@
-<%= javascript_include_tag "application.js" %>
+<% unless  page == 'view' %>
+  <%= javascript_include_tag "rating.js" %>
+<% end %>
 <% @ratingHint = getOptions('RatingHint')%>
 
 <%= form_for [@venue, @review], :remote =>true, :class=>"form-horizontal" do |f| %>
   <div class="row-fluid">
-    <div class="roundedBorder span11">
-      <% if @review.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(@review.errors.count, "error") %> prohibited this review from being saved:</h2>
-
-          <ul>
-            <% @review.errors.full_messages.each do |msg| %>
-              <li><%= msg %></li>
-            <% end %>
-          </ul>
-        </div>
-      <% end %>
-  
+    <div class="roundedBorder span11">  
       <h4>Rate this venue</h4>
       <table class="span12 control-group">
         <tr>
@@ -63,10 +53,17 @@
       <%=f.text_area :review, :value=> @review.review, :rows=>5, :placeholder => "Write a Review", :class=>"span12", :id=>"writeReview"%>
   
       <% @updateText = "Post" %>
-      <% @updateText = "Update" unless @review.review.nil? %>
+      <% @updateText = "Update" if page == 'edit' %>
       <% @disableButton = current_user.nil? %>
   
       <%= f.submit @updateText, :class => "btn btn-success fr", :id => "btnPost", :disabled => @disableButton  %>
+      <% if @review.errors.any? %>
+        <div class="error_message">
+            <% @review.errors.full_messages.each do |msg| %>
+              <%= msg %><br/>
+            <% end %>
+        </div>
+      <% end %>
     </div>
   </div>
 <% end %>
