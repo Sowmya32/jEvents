@@ -20,7 +20,7 @@ end
 
 group :development do
   	gem 'annotate'
-  	gem 'sqlite3'
+#  	gem 'sqlite3'
   	gem 'webrick'
   	gem 'localtunnel' #This is required for Facebook open graph local testing, which requires publically acessible objects
 end

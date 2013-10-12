@@ -69,7 +69,7 @@ class ReviewsController < ApplicationController
         @review = Review.new
         format.js 
       else
-        format.html { render action: "new" }
+        format.js { render action: "new" }
         format.json { render json: @review.errors, status: :unprocessable_entity }
       end
     end
@@ -91,7 +91,7 @@ class ReviewsController < ApplicationController
         @review = Review.new
         format.js 
       else
-        format.html { render action: "edit" }
+        format.js { render action: "edit" }
         format.json { render json: @review.errors, status: :unprocessable_entity }
       end
     end
