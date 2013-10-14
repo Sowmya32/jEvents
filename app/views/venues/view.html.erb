@@ -32,29 +32,57 @@ end%>
 <%#= hidden_field_tag 'hasUserAlreadyRated', @hasUserAlreadyRated %>
 <%= hidden_field_tag 'ratingHint', @ratingHint %>
 
-<div class="row-fluid">
-  <div>
-    <h4><%= @venue.name %>, <%= @venue.venue_type %></h4>
-    <%= render partial: 'ratings/rating', locals: { :venues => @venue } %>
-    <h6><%= @venue.address.address %>, <%= @venue.address.area %></h6>
+<!-- Venue Name, Rating and Reviews div -->
+<div class="row-fluid  brdr width97 marpad5">
+  <div class="span5">
+    <span class="venueName"><%= @venue.name %> </span> <!--, <%= @venue.venue_type %>-->
+    
+    <p class="venueAddress">
+      <%= @venue.address.address %>, <%= @venue.address.area %><br/>
+      <span class="venueLandmark">Landmark: </span> <%= @venue.address.landmark %>
+    </p>
+
+    
   </div>
 
-  <div class="fb-like fr" data-width="250" data-action="recommend" data-show-faces="true"></div>
-  <% if @hasUserAlreadyRated %>
-    You have rated this venue.
-  <% else %>
-    <div id="rating-div">
-      Rate this venue:
-      <div id="star"></div>
-    </div>
-  <% end %>
+  <div class="span2 venueRevRating"> <!-- if reviewed, this should be updated without page refresh-->
+        <!-- link to the review part of the page-->
+        <% if @venue.reviews.size > 0 %>
+          <%= pluralize(@venue.reviews.size, 'Review') %>
+        <% end %>
+        <br/>
+
+        <div class="fb-like fr" data-width="250" data-action="recommend" data-show-faces="true"></div>
+  </div>
+
+  <div id="rating-div" class="span3 venueRevRating">   
+        <%= render partial: 'ratings/rating', locals: { :venues => @venue } %>    
+
+        <% if @hasUserAlreadyRated %>
+            You have rated this venue.
+        <% else %>
+        <div id="rating-div">
+           <span style="font-weight:normal"> Rate this venue:</span>
+            <div id="star"></div>
+        </div>
+        <% end %>
+  </div>
+
+  <div id="BookNow_Btn_div" class="span2">
+        <input type="submit" value="Book Now" class="btn-view">
+   </div>
 </div>
-<div id="show_venue">
-  <div class="row-fluid">
-    <div class="span3 venue-img-div">
-      <% if @venue.images.count==0 %> 
-        <%= image_tag('venue.jpg', :class => "venue-img") %>
-      <%else%>
+<!-- First div -containing Venue Name, Rating and Reviews ends here -->
+
+
+<!-- Image slideshow, Imp info about venue, Contact us div statrs here -->
+<div id="show_venue" class="row-fluid width97 brdr marpad5">
+  
+    <div id="image_slideshow" class="span3 brdr_right" style="">
+      <div class="venue-img-div" style="margin-left:0px;" >
+        <% if @venue.images.count==0 %> 
+          <%= image_tag('venue.jpg', :class => "venue-img") %>
+        <%else%>
         
           <ul class="span3 bxslider">
             <%@venue.images.each do |i| %>
@@ -64,13 +92,14 @@ end%>
             <%end%>
           </ul>
         
-    <%end %>
-     </div>
-     <div class="span6 venue-amenities">
-      <p style="font-size:20px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= @venue.description %></p>
+        <%end %>
+      </div>
+    </div>
 
-
-        <div class="span4 amenities-div">
+    
+    <div class="span6 venue-amenities" >
+      <p style="font-size:20px">&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;<%= @venue.description %></p>
+        <div class="span4 amenities-div"  style="margin-left:0px;">
           <ul>
             <li>
               <%= unless @venue.min_capacity.nil? 
@@ -95,7 +124,7 @@ end%>
           </ul>
         </div>
 
-        <div class="span4 amenities-div">
+        <div class="span5 amenities-div">
           <ul>
             <li>
               <%= if @venue.facility != nil && @venue.facility.airconditioning?
@@ -117,18 +146,60 @@ end%>
                 image_tag('nv.png') + ' Cost/Plate Rs:' + @venue.rate.nonveg_plate_cost.to_s
               end %>
             </li>    
-                
+          </ul>     
         </div>
-      </div>
-
+  
     </div>
 
-    <div class="row-fluid view-suit">
-      <%= unless @suitable == ''
-        content_tag(:span, 'Suitable for ' + @suitable[0..(@suitable.length-3)])  
-      end%>
-    </div>          
-        </br>
+    <div id="contact_us" class="span3 brdr_left" >
+         <p class="contactUs_heading">Contact Us</p>
+                 
+              <p> Mobile   : <span class="info"> 8220043507 </span> <br/>
+                             Email-id :<span class="info">contact@jollyeventz.com </span> 
+              </p>
+              
+              <p> Enquire-us <br/>
+                Name: <input type="text"><br>
+                Mobile: <input type="text"><br/>
+                Email-id: <input type="text"><br/> </p>
+               
+               <input type="submit" value="Submit" class="btn-view fr">                  
+    </div> 
+</div>
+<!-- Image slideshow, Imp info about venue, Contact us div statrs here -->
+
+
+<!-- Tab Menu and Highlights starts here -->
+<div class="row-fluid brdr width97 marpad5">
+  
+  <div id="Highlights" class="span5" style="float:right; "> 
+    <% unless @venue.highlights.count == 0 %>
+      <div class="highlights-div" >
+        <p class="higlights_heading">Highlights</p>
+          <% @venue.highlights.each do |h| %>
+             <label><%= h.highlight %></label>
+          <%end%>
+      </div>
+    <%end%>
+  </div>
+
+  <!-- Tab2 (not external Html) -->
+  <div style="width:58% ">
+    <ul class="tabs">
+        <li><a href="#view1">Function Spaces</a></li>
+        <li><a href="#view2">Amenities</a></li>
+        <li><a href="#view3">Locate in Map</a></li>
+    </ul>
+    
+    <div class="tabcontents">
+      <div id="view1">
+      <!--
+        <div class="row-fluid view-suit">
+            <%= unless @suitable == ''
+              content_tag(:span, 'Suitable for ' + @suitable[0..(@suitable.length-3)])  
+            end%>
+        </div>
+      -->
         <div class="row-fluid">
         <%unless @venue.num_halls.nil?%>
           <div id="halls-div" class="span6">
@@ -191,22 +262,31 @@ end%>
                       </tr>
                   <% end %>
                 <%end%>
-            <% end %>
-          </table>
-        </div>
-        <% unless @venue.highlights.count == 0 %>
-          <div class="span2 highlights-div">
-            <p style="font-size:18px; text-align:centre;">Highlights</p>
-            <% @venue.highlights.each do |h| %>
-              <label><%= h.highlight %></label>
-            <%end%>
+              <% end %>
+            </table>
           </div>
-        <%end%>
-      </div></br>
+        </div>        
+      </div>
 
+      <div id="view2">
+        Under Construction
+      </div>
+      
+      <div id="view3">
+        Under Construction
+      </div>
+    </div>
+  </div>
+</div>
+<!--  Tab Menu and Highlights ends here --> 
+
+
+<!--  Review Part starts  here --> 
+      <br/>
       <div id="reviews_div">
           <div id="new-review">
             <%= render partial: 'reviews/form', locals: { :venues => @venue, :review => @review, :page => 'view' } %>
           </div>
       </div>
-</div>
+<!--  Review Part ends  here --> 
+
