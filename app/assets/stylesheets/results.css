@@ -33,10 +33,10 @@
 
 .SearchResults:hover{
   border: 2px solid #dddddd;
-  /*border-color: #666666;
-  background-color: rgba(146, 224, 249, 0.5); */
   border-color: rgba(153, 50, 204, 0.8);
-  background-color: rgba(153, 50, 204, 0.1);
+  /*border-color: #666666;
+  background-color: rgba(146, 224, 249, 0.5); 
+  background-color: rgba(153, 50, 204, 0.1); */
 }
 
 .filters{
@@ -106,12 +106,12 @@ label span input {
 
 /* ----- show-results page - venue image ------ */
 .venue-img{
-	float: left; 
-	width:170px;
-	height:133px;
+  float: left; 
+  width:170px;
+  height:133px;
   margin-left: 5px;
   margin-top: 6px;
-	 /*position: relative; */
+   /*position: relative; */
    /*border:1px solid #b3b3b3;*/
 }
 
@@ -156,6 +156,69 @@ label span input {
   width: 50px;
 }
 
+
+.brdr {
+  border: 3px solid #dddddd;
+  border-color: rgba(153, 50, 204, 0.4);
+}
+
+.brdr_right {
+  border-right: 3px solid #dddddd;
+  border-right-color: rgba(153, 50, 204, 0.4);
+}
+
+.brdr_left {
+  border-left: 3px solid #dddddd;
+  border-left-color: rgba(153, 50, 204, 0.4);
+
+}
+
+.width97 {
+  width: 97%;
+}
+
+.marpad5 {
+  margin:5px 0px;
+  padding:5px;
+}
+
+#image_slideshow {
+  padding-right: 5px;
+}
+
+.venueName{
+  font-family: Georgia,"Times New Roman",Times,serif;
+  font-style: italic;
+  font-size: 19px;
+  font-weight: 600;
+}
+
+.venueAddress {
+  font-family: arial,helvetica,clean,sans-serif; 
+  font-size: 13px;  
+  line-height: 18px;
+  margin-bottom: 3px;
+  margin-top: 4px;
+}
+
+.venueLandmark {
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.venueRevRating {
+  font-family: "Times New Roman",Times,serif;
+  font-size: 18px;  
+  font-weight: bold;
+  margin-bottom:3px;  
+}
+
+#BookNow_Btn_div{
+  text-align: right;
+  padding:20px;
+  padding-right: 6px;
+}
+
 .view-suit {
   max-height: 100px;
 }
@@ -175,6 +238,7 @@ label span input {
 
 .venue-img-div{
   margin-top: 10px;
+  padding:10px;
 }
 
 .venue-img-div img{
@@ -187,12 +251,26 @@ label span input {
 }
 
 .venue-amenities{
-  padding: 10px;
+  padding: 10px 0px;
   margin: 10px;
-  margin-top: 25px;
-  border: 4px solid #cc1111;
-  border-radius: 16px;
-  position: relative;
+  /*border: 4px solid #cc1111;
+  border-radius: 16px; */  
+}
+
+#contact_us{
+   padding: 10px;
+   padding-top: 20px;
+   padding-bottom: 0px;
+   margin: 0px;   
+   
+ }
+
+.contactUs_heading{
+  font-size:18px; 
+  font-weight: bold;
+  font-style: normal;
+  color:black;
+  text-align: center;
 }
 
 .halls-table{
@@ -200,12 +278,25 @@ label span input {
 }
 
 .highlights-div{
-  padding: 20px;
-  margin-left: 30px;
-  border: 4px solid #cc1111;
+  padding: 10px;
+  margin-top: 6%;
+  border: 2px solid purple;
   border-radius: 16px;
-  position: relative;
   font-size: 11px;
+  font-style: italic;
+  color:purple;
+}
+
+.higlights_heading {
+  font-size:18px; 
+  font-weight: bold;
+  font-style: normal;
+  color:black;
+}
+
+.highlights-div label{
+  font-size: 15px;
+  font-weight: 600;
 }
 
 .new-venue-img{
@@ -228,11 +319,10 @@ label span input {
 }
 
 .venue-icons{
-	
-	padding-right: 4px;
-	position: relative;
-	width: 18px;
-	height: 18px;
+  padding-right: 4px;
+  position: relative;
+  width: 18px;
+  height: 18px;
 }
 
 .query_param{
@@ -276,6 +366,11 @@ label span input {
   cursor:pointer;
 }
 
+.numResults{
+  font-family: 'Open Sans', "Book Antiqua", Arial, sans-serif;
+  font-size: 18px;
+}
+
 .SearchResults a:hover {
   text-decoration:none;
 }
@@ -285,7 +380,10 @@ label span input {
   padding-right: 3px;
   margin-bottom: 3px;
   margin-top: 5px;
-  font-size: 18px;
+  font-family: Georgia,"Times New Roman",Times,serif;
+  font-style: italic;
+  font-size: 16px;
+  font-weight: 500;
   line-height: 1.2;
   letter-spacing: 0.04px;  
   /*background-color: rgba(136, 208, 226, 0.49); */
@@ -303,10 +401,23 @@ label span input {
   /*color: #0088cc; */
 }
 
+.h3VenueName{
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.verify-icon{
+  padding-left: 2px;
+  position: relative;
+  width: 30px;
+  height: 22px;
+}
+
 #resultdiv:hover > #result_content_div h3 {
   background-color: rgba(153, 50, 204, 0.6);
   color:white;
 }
+
 
 .SearchResults li {
   line-height: 30px;
@@ -315,6 +426,10 @@ label span input {
 .hallandcapacity{
   line-height:1;
   margin-top: 5px;
+}
+
+.hall_div{
+  width:72%;
 }
 
 .numRooms {
@@ -342,9 +457,9 @@ label span input {
 }
 
 .search-button{
-	float: right;
-	margin-left: 0px;
-	padding: 3px;
+  float: right;
+  margin-left: 0px;
+  padding: 3px;
   background-color: rgba(153, 50, 204, 0.8);
   -webkit-border-radius: 6px;
   -moz-border-radius: 6px;
@@ -352,6 +467,11 @@ label span input {
   color: white;
   font-weight: 800; 
 
+}
+
+.capacity_div{
+  width:25%;
+  float:right;  
 }
 
 .capacity {
@@ -531,11 +651,13 @@ hr{
 }
 
 h6{
-    font-size: 18px;
-    font-weight: 900;
+    font-family: Georgia,"Times New Roman",Times,serif;
+    font-style: italic;
+    font-size: 15px;
+    font-weight: 600;
   }
 
-.view_btn_alignment {
+.Rt_bottom_alignment {
   margin:0; 
   padding:0; 
   position:absolute; 
@@ -543,22 +665,64 @@ h6{
   bottom:5px
 }
 
+.view_btn_alignment {
+  margin:0; 
+  padding:0; 
+}
+
 .Write_review_alignment {
   margin:0; 
-  padding:3px; 
-  position:absolute; 
+  margin-right: 2px;
   right:130px; 
-  bottom:5px;
   line-height: 1; 
+  float:right;
 }
 
 .links {
   color:black;
   font-style: italic, bold;
   font-family: Georgia,Times,"Times New Roman",serif;
+  font-size: 12px;
+  font-style: italic;
+  
 }
 
 .links:hover {
-  font-size: 20px;
-  color: black;
+  -moz-box-shadow:inset 0px 1px 0px 0px #fce2c1;
+  -webkit-box-shadow:inset 0px 1px 0px 0px #fce2c1;
+  box-shadow:inset 0px 1px 0px 0px #fce2c1;
+  background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ffc477), color-stop(1, #ff8c00) );
+  background:-moz-linear-gradient( center top, #ffc477 5%, #ff8c00 100% );
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffc477', endColorstr='#ff8c00');
+  background-color:#ffc477;
+  -webkit-border-radius:6px;
+  -moz-border-radius:6px;
+  border-radius:6px;  
+  text-indent:0;
+  border:1px solid #eeb44f;
+  display:inline-block;
+  color:black;
+ /* font-family:'Open Sans', "Book Antiqua", Arial, sans-serif; */
+  font-size:11px;
+  font-weight:bold;
+  font-style:italic;
+  height:22px;
+  line-height:22px;
+  width:100px;
+  text-decoration:none;
+  text-align:center;
+  padding:0px;
+  margin:0px;
+  /*padding:2px;
+  background-color: orange;
+  border: 1px solid #cccccc;
+  border-color: orange;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight:600;
+  color:black;
+  font-style: italic; */
 }
+

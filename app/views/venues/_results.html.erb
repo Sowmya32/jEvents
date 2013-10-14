@@ -95,7 +95,7 @@ end
 			<span style="cursor: pointer;" onclick="prev_click();" >&lt;Prev&nbsp;</span>
 		<% end %>
 
-		<strong><span style="color:orange;"><%= (((@query.page_number.to_i-1)*10)+1).to_s + ' to ' +  [@query.page_number.to_i*10, @count].min.to_s unless @count == 0 %></span></strong>
+		<strong><%= (((@query.page_number.to_i-1)*10)+1).to_s + ' to ' +  [@query.page_number.to_i*10, @count].min.to_s unless @count == 0 %></strong>
 
 		<% if (@query.page_number.to_i*10)>=@count %>
 			<span style="pointer-events: none; cursor: default;">&nbsp;Next&gt;</span>
@@ -107,9 +107,11 @@ end
 </div>
 	<% if @venue.count > 0 %> 
 	 	<% if @venue.count == 1 %>                            
-		   <h6> <span style="color:orange;font-weight:bold"><%= @count.to_s %> </span> Search result found</h6> 		
+		   <h6> <span class="numResults"><%= @count.to_s %> </span> 
+		   		<span style="font-weight:500"> Search result found</span> </h6> 		
         <% else %> 
-            <h6> <span style="color:orange;font-weight:bold"><%= @count.to_s %> </span> Search results found</h6>                
+             <h6> <span class="numResults"><%= @count.to_s %> </span> 
+		   		<span style="font-weight:500"> Search results found</span> </h6>               
         <% end %>   
 
 	<% else  %>
@@ -133,8 +135,8 @@ end
 				<span class="fr"><%= c.address.area %></span>
 				<span>
                                   <%#= link_to(c.name, venue_path(c), :rel => "modal:open", :id=>"show_modal")%>
-                   <%= c.name %>
-            		<%= image_tag('verify.png') if c.is_verified %>
+                  	<span class=" h3VenueName"><%= c.name %> </span>
+            		<%= image_tag('verify.png', :class => "verify-icon") if c.is_verified %>
                 </span>
 			</h3>
 		
@@ -173,32 +175,35 @@ end
 			<p class="address" ><%= c.address.address %>, <%= c.address.area %> <br/>
 			<span class="Landmark">Landmark: </span> <%= c.address.landmark %></p>
 
-			<% unless c.max_capacity.nil? %>
-			<p class="capacity">Upto&nbsp;<%= c.max_capacity %></p> 
-			<%= image_tag('Capacity_ppl.jpg', :class => "venue-icons fr top4", :title=>'Capacity', :alt=>'Capacity') %>
+			<div class="hallandcapacity">
+				<div class="capacity_div">
+					<% unless c.max_capacity.nil? %>
+						<p class="capacity">Upto&nbsp;<%= c.max_capacity %></p> 
+						<%= image_tag('Capacity_ppl.jpg', :class => "venue-icons fr top4", :title=>'Capacity', :alt=>'Capacity') %>
 
-			<% end %>
-			
-			                   
-           
-            <div class="hallandcapacity ">
-				<% @hallTypes.each do |ht| %>
-				<% @hall_count = 0 %>
-				<% c.halls.each do |h| %>
-					<% if ht == h.hall_type %>
-						<% @hall_count = @hall_count + 1 %>
 					<% end %>
-				<% end %>
-				<% if @hall_count > 0 %>
-					<% ht = ht + 's' if @hall_count > 1 %>
-					<span class="numRooms" ><%= @hall_count.to_s + '-' + ht + ' | ' %></span>&nbsp;
-				<% end %>
-				<% end %>
+				</div>
+						                   
+           
+            	<div class="hall_div ">
+					<% @hallTypes.each do |ht| %>
+					<% @hall_count = 0 %>
+					<% c.halls.each do |h| %>
+						<% if ht == h.hall_type %>
+							<% @hall_count = @hall_count + 1 %>
+						<% end %>
+					<% end %>
+					<% if @hall_count > 0 %>
+						<% ht = ht + 's' if @hall_count > 1 %>
+							<span class="numRooms" ><%= @hall_count.to_s + '-' + ht + ' | ' %></span>&nbsp;
+						<% end %>
+					<% end %>
+				</div>
 			</div>
 
-			<div >
+			<div class="Rt_bottom_alignment" style="width:80% ;">
 				<% if c.view_available %>
-					<div class="view_btn_alignment">
+					<div class="view_btn_alignment fr" style="width:100px;" >
 				
 						<%= link_to 'View venue', view_venues_path(:venue => c.id), :class => "btn-view fr" %>
 					</div>
@@ -221,17 +226,19 @@ end
 	<% end %>
 
 	<div class="navigation">
-	<%= (((@query.page_number.to_i-1)*10)+1).to_s + ' to ' +  [@query.page_number.to_i*10, @count].min.to_s + ' of ' + @count.to_s  unless @count == 0 %>
 	<% if @count > 10%>
 		<% if @query.page_number.to_i == 1 %>
-			<a href="#" class="btn btn-primary btn-small nav-button disabled" style="pointer-events: none;cursor: default;">&lt; Prev</a>
+			<span style="pointer-events: none; cursor: default;">&lt;Prev&nbsp;</span>
 		<% else %>
-			<a href="#" class="btn btn-primary btn-small nav-button" onclick="prev_click();" >&lt; Prev</a>
+			<span style="cursor: pointer;" onclick="prev_click();" >&lt;Prev&nbsp;</span>
 		<% end %>
+
+		<strong><%= (((@query.page_number.to_i-1)*10)+1).to_s + ' to ' +  [@query.page_number.to_i*10, @count].min.to_s unless @count == 0 %></strong>
+
 		<% if (@query.page_number.to_i*10)>=@count %>
-			<a href="#" class="btn btn-primary btn-small nav-button disabled" style="pointer-events: none;cursor: default;" >Next &gt;</a>
+			<span style="pointer-events: none; cursor: default;">&nbsp;Next&gt;</span>
 		<% else %>
-			<a href="#" class="btn btn-primary btn-small nav-button" onclick="next_click();" >Next &gt;</a>
+			<span style="cursor: pointer;"  onclick="next_click();" >&nbsp;Next&gt;</span>
 		<% end %>
 	<% end%>
 </div>
