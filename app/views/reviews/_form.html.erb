@@ -52,11 +52,11 @@
       <%= f.hidden_field :rating_facilities, :value => @review.rating_facilities %>
       <%=f.text_area :review, :value=> @review.review, :rows=>5, :placeholder => "Write a Review", :class=>"span12", :id=>"writeReview"%>
   
-      <% @updateText = "Post" %>
-      <% @updateText = "Update" if page == 'edit' %>
+      <% @updateText = "    Post    " %>
+      <% @updateText = "  Update  " if page == 'edit' %>
       <% @disableButton = current_user.nil? %>
   
-      <%= f.submit @updateText, :class => "btn btn-success fr", :id => "btnPost", :disabled => @disableButton  %>
+      <%= f.submit @updateText, :class => "btn-view fr", :id => "btnPost", :disabled => @disableButton  %>
       <% if @review.errors.any? %>
         <div class="error_message">
             <% @review.errors.full_messages.each do |msg| %>
